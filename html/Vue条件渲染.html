@@ -1,0 +1,20 @@
+<script src="../js/vue.min.js"></script>
+<div id="app">
+    <span>请输入成绩</span></span>
+    <input type="number" v-model="scores"></input>
+    <div v-if="scores==null"></div>
+    <div v-else-if="scores<60">不及格</div>
+    <div v-else-if="scores>=60 & scores<75">良好</div>
+    <div v-else-if="scores>=75 & scores<85">中等</div>
+    <div v-else="scores>=85">优秀</div>
+    <div v-show="scores<0">分数下限为100分！</div>
+    <div v-show="scores>100">分数上限为100分！</div>
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            scores: null
+        }
+    })
+</script>

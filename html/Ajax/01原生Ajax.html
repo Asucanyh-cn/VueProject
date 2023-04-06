@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>原生Ajax演示</title>
+        <script type="text/javascript"></script>
+    </head>
+    <body>
+        <input type="button" onclick="show()" value="查看数据"/>
+        <div id="content"></div>
+    </body>
+    <script>
+    function show(){
+        //1.创建一个XmlHttpRequest对象
+        var xhr=new XMLHttpRequest();
+        //2.发送异步请求
+        // var url="https://api.bilibili.com/pgc/season/index/result?st=2&style_id=-1&area=-1&release_date=-1&season_status=-1&order=2&sort=0&page=1&season_type=2&pagesize=5&type=1";
+        var url="data.txt"
+        xhr.open("Get",url);
+        xhr.send();
+        //3.获取服务器响应数据
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                document.getElementById("content").innerHTML=xhr.responseText;
+            }
+        }
+}
+</script>
+</html>

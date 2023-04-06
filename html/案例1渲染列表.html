@@ -1,0 +1,56 @@
+<script src="../js/vue.min.js"></script>
+
+<div id="table">
+    <table align="center" border="1" style="border-spacing: 0;">
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>班级</th>
+            <th>科目</th>
+            <th>成绩</th>
+        </tr>
+        <tr v-for="student in students">
+            <td>{{student.sno}}</td>
+            <td>{{student.sname}}</td>
+            <td>{{student.sclass}}</td>
+            <td>{{student.scourse}}</td>
+            <td v-if="student.sscore==null"></td>
+            <td v-else-if="student.sscore<60">不及格</td>
+            <td v-else-if="student.sscore>=60 & student.sscore<75">良好</td>
+            <td v-else-if="student.sscore>=75 & student.sscore<85">中等</td>
+            <td v-else="student.sscore>=85">优秀</td>
+            <td v-show="student.sscore<0">分数下限为100分！</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    new Vue({
+        el:"#table",
+        data:{
+            students:[
+                {
+                    sno:01,
+                    sname:"王小明",
+                    sclass:"信息2001", 
+                    scourse:"计算机组成原理",
+                    sscore:70,
+                },
+                {
+                    sno:02,
+                    sname:"王二狗",
+                    sclass:"信息2002", 
+                    scourse:"JavaEE",
+                    sscore:55,
+                },
+                {
+                    sno:03,
+                    sname:"张三",
+                    sclass:"护理2001", 
+                    scourse:"人体解剖学",
+                    sscore:90,
+                }
+            ]
+        }
+    })
+</script>
