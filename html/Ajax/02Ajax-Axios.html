@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax-Axios</title>
+<script type="text/javascript" src="../../js/axios.min.js"></script>
+</head>
+<body>
+    <button onclick="get1()">获取数据1</button>
+    <div id="content1"></div>
+    <button onclick="get2()">获取数据2</button>
+    <div id="content2"></div>
+</body>
+<script>
+    function get1(){
+        axios({
+            method:"get",
+            url:"http://localhost:8080/listUser"
+        }).then((result)=>{
+            console.log(result.data.data);
+            document.getElementById("content1").innerHTML=JSON.stringify(result.data.data);
+        })  
+    };
+    function get2(){
+        axios.get("http://localhost:8080/listAllUsers")
+        .then(res => {
+            console.log(res.data.msg)
+            document.getElementById("content2").innerHTML=JSON.stringify(res.data.data);
+        })
+    }
+</script>
+</html>
