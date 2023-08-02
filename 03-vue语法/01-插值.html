@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-插值</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 01 设置vue的控制域 -->
+    <div id="app">
+        <div>{{NormalText}}</div>
+        <div v-once>{{OnceText}}</div>
+        <div v-html="rawHtml">{{rawHtml}}</div>
+    </div>
+    <script>
+        //02 创建vue实例对象
+        const vm=new Vue({
+            // el:用于指定控制域，值为css选择器。
+            el:'#app',
+            // data:用于设置数据。
+            data:{
+                NormalText:"普通文本插值2",
+                OnceText:"一次性插值2",
+                rawHtml:"<p>我是html</p>"
+            }
+        });
+    </script>
+</body>
+</html>

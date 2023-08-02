@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>00-指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 01 设置vue的控制域 -->
+    <div id="app">
+        <div v-text="vTextCmd"></div>
+        <div v-html="rawHtmlCmd"></div>
+        <div v-show="true">v-show条件渲染</div>
+        <div v-if="true">v-if条件渲染</div>
+        <div v-else-if='false'>v-else-if条件渲染</div>
+        <div v-else>v-else条件渲染</div>
+
+        <table>
+            <tr>
+                <td>id</td>
+                <td>name</td>
+                <td>role</td>
+            </tr>
+            <tr v-for="item in items" :key="item.id">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.role}}</td>
+            </tr>
+        </table>
+
+        <button v-on:click="doThat('hello', $event)">内联函数</button>
+        <input type="text" v-bind:placeholder="ph">
+        <hr>
+        <form>
+            <input class="input1" type="text" :value="value">
+            <input class="input2" type="text" v-model="value">
+            <button @click="printValueContent" type="submit">打印</button>
+        </form>
+        <hr>
+        <!-- <input type="text" v-model.trim="value"> -->
+        <!-- <input type="text" v-model.number="value"> -->
+        <input type="text" v-model.lazy="value">
+        <button @click="printValue" type="submit">打印</button>
+    </div>
+    <script>
+        //02 创建vue实例对象
+        const vm = new Vue({
+            // el:用于指定控制域，值为css选择器。
+            el: '#app',
+            // data:用于设置数据。
+            data: {
+                vTextCmd: "我是v-text",
+                rawHtmlCmd: "<p>我是html</p>",
+                items: [
+                    { id: 2, name: 'b', role: 1 },
+                    { id: 1, name: 'a', role: 0 },
+                    { id: 3, name: 'd', role: 1 },
+                ],
+                ph: "input的默认值",
+                value: "VALUE"
+            },
+            methods: {
+                doThat: function (str, e) {
+                    console.log(str);
+                    console.log(e);
+                },
+                printValueContent() {
+                    const content1 = document.querySelector('.input1').value;
+                    const content2 = document.querySelector('.input1').value;
+                    console.log(content1);
+                    console.log(content2);
+                    console.log(this.value);
+                },
+                printValue() {
+                    console.log(this.value);
+                    console.log(typeof (this.value));
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

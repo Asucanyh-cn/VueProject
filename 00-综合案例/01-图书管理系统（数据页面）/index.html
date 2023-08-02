@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图书数据</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            margin: 20px;
+        }
+
+        .titleBox {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f7f7f7;
+            border: 1px solid #e5e5e5;
+            border-radius: 3px;
+        }
+
+        .funcBox {
+            border: 1px solid #e5e5e5;
+            border-radius: 3px;
+        }
+
+        .desc{
+            padding: 10px;
+            background: #f7f7f7;
+            border: 1px solid #e5e5e5;
+        }
+        .func{
+            padding: 30px;
+        }
+        .tbBox{
+            margin-bottom: 20px;
+            background: #f7f7f7;
+            border-radius: 3px;
+        }
+        table{
+            width: 100%;
+        }
+        tr:nth-child(odd){
+            background: #f7f7f7;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="titleBox">
+            <h1>图书数据</h1>
+        </div>
+        <div class="funcBox">
+            <div class="desc">
+                <p>添加图书</p>
+            </div>
+            <div class="func">
+                <span>图书名称</span>
+                <input type="text">
+                <button>添加</button>
+            </div>
+        </div>
+        <div class="tbBox">
+            <table>
+                <tr>
+                    <td>#</td>
+                    <td>图书号</td>
+                    <td>图书名</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+                <!-- v-for 生成数据 -->
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
