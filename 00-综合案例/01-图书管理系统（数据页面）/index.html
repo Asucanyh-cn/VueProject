@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>图书数据</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -29,26 +30,35 @@
             border-radius: 3px;
         }
 
-        .desc{
+        .desc {
             padding: 10px;
             background: #f7f7f7;
             border: 1px solid #e5e5e5;
         }
-        .func{
+
+        .func {
             padding: 30px;
         }
-        .tbBox{
-            margin-bottom: 20px;
+
+        .tbBox {
+            margin: 20px 0 20px 0;
             background: #f7f7f7;
             border-radius: 3px;
         }
-        table{
+
+        table {
             width: 100%;
+            border-collapse: collapse;
+            text-align: center;
         }
-        tr:nth-child(odd){
+        td{
+            padding: 7px;
+            border: #e5e5e5 1px solid;
+        }
+
+        tr:nth-child(1) {
             background: #f7f7f7;
         }
-        
     </style>
 </head>
 
@@ -77,12 +87,41 @@
                     <td>操作</td>
                 </tr>
                 <!-- v-for 生成数据 -->
-                <tr>
-                    <td></td>
+                <tr v-for="(book,index) in bookData">
+                    <td>{{index}}</td>
+                    <td>{{book.bid}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.status}}</td>
+                    <td>
+                        <button>删除</button>
+                    </td>
                 </tr>
             </table>
         </div>
     </div>
+    <script>
+        const vm = new Vue({
+            el: ".box",
+            data: {
+                bookData: [{
+                    bid: 111,
+                    name: "老人与海",
+                    status: true
+                },
+                {
+                    bid: 222,
+                    name: "孤独人生",
+                    status: true
+                },
+                {
+                    bid: 333,
+                    name: "爱与和平",
+                    status: true
+                },
+                ]
+            }
+        });
+    </script>
 </body>
 
 </html>
