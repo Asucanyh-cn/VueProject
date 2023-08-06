@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04-计算属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 01 设置vue的控制域 -->
+    <div id="app">
+        <p>RGB</p>
+        <input type="text" v-model="r">
+        <input type="text" v-model="g">
+        <input type="text" v-model="b">
+        <p class="box" :style="{background:rgb}">
+            {{rgb}}
+        </p>
+    </div>
+    <script>
+        //02 创建vue实例对象
+        const vm = new Vue({
+            // el:用于指定控制域，值为css选择器。
+            el: '#app',
+            // data:用于设置数据。
+            data: {
+                r: 0,
+                g: 0,
+                b: 0
+            },
+            computed:{
+                rgb(){
+                    return `RGB(${this.r},${this.g},${this.b})`
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

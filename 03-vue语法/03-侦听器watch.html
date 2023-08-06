@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-侦听器watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- 01 设置vue的控制域 -->
+    <div id="app">
+        <input type="text" v-model="username"><label id="lb1"></label>
+        <p>{{username}}</p>
+        <input type="text" v-model="username2"><label id="lb2"></label>
+        <p>{{username2}}</p>
+        <input type="text" v-model="info.username3"><label id="lb3"></label>
+        <p>{{info.username3}}</p>
+    </div>
+    <script>
+        //02 创建vue实例对象
+        const vm = new Vue({
+            // el:用于指定控制域，值为css选择器。
+            el: '#app',
+            // data:用于设置数据。
+            data: {
+                username: "test",
+                username2: "test",
+                info: {
+                    username3: "test"
+                }
+            },
+            watch: {
+                //方法侦听器
+                username(newV, oldV) {
+                    $.get("http://127.0.0.1:8080/api/isExists", {
+                        userName: this.username
+                    },
+                        function (res) {
+                            if (res.status === 1)
+                                $('#lb1').html(res.msg)
+                            if (res.status === 0)
+                                $('#lb1').html(res.msg)
+                        })
+                },
+                //对象侦听器（immediate）
+                username2: {
+                    handler(newV, oldV) {
+                        $.get("http://127.0.0.1:8080/api/isExists", {
+                            userName: this.username
+                        },
+                            function (res) {
+                                if (res.status === 1)
+                                    $('#lb2').html(res.msg)
+                                if (res.status === 0)
+                                    $('#lb2').html(res.msg)
+                            })
+                    },
+                    immediate: true
+                },
+                //对象侦听器（deep）
+                // info: {
+                //     handler(newV, oldV) {
+                //         $.get("http://127.0.0.1:8080/api/isExists", {
+                //             userName: this.info.username3
+                //         },
+                //             function (res) {
+                //                 if (res.status === 1)
+                //                     $('#lb3').html(res.msg)
+                //                 if (res.status === 0)
+                //                     $('#lb3').html(res.msg)
+                //             })
+                //     },
+                //     deep: true
+                // },
+                //对象侦听器-深度侦听简写（deep）
+                'info.username3'(newV, oldV) {
+                    $.get("http://127.0.0.1:8080/api/isExists", {
+                        userName: this.info.username3
+                    },
+                        function (res) {
+                            if (res.status === 1)
+                                $('#lb3').html(res.msg)
+                            if (res.status === 0)
+                                $('#lb3').html(res.msg)
+                        })
+                },
+            }
+        });
+
+    </script>
+</body>
+
+</html>

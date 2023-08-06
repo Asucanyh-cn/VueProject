@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-过滤器filter</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{message|msgFilter}}</p>
+    </div>
+    <div id="app1">
+        <p>{{message|msgFilter}}</p>
+    </div>
+    <div id="app2">
+        <p>{{message|msgFilter("我是第一个参数","我是第二个参数")}}</p>
+    </div>
+
+
+    <script>
+        Vue.filter('msgFilter',(msg)=>{
+            return msg+"(全.过滤后)"
+        })
+        const vm=new Vue({
+            el:'#app',
+            data:{
+                message:"我是测试信息。"
+            },
+            filters:{
+                msgFilter(msg){
+                    return msg+"(私.过滤后)"
+                }
+            }
+        })
+        const vm1=new Vue({
+            el:'#app1',
+            data:{
+                message:"我是测试信息1。"
+            },
+        })
+        const vm2=new Vue({
+            el:'#app2',
+            data:{
+                message:"我是测试信息2。"
+            },
+            filters:{
+                msgFilter(msg,a1,a2){
+                    return `${msg} ${a1} ${a2}(私.过滤后)`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

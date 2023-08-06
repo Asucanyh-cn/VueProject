@@ -51,14 +51,32 @@
             border-collapse: collapse;
             text-align: center;
         }
-        td{
+
+        td {
             padding: 7px;
             border: #e5e5e5 1px solid;
         }
 
-        tr:nth-child(1) {
-            background: #f7f7f7;
+        tr:nth-child(odd) {
+            background: #ffffff;
         }
+        
+        .func{
+            width: 320px;
+            margin: 0 auto;
+        }
+
+        .func>div>input{
+            float: right;
+        }
+
+        .func>button{
+            float: right;
+        }
+        .func>*{
+            margin: 5px;
+        }
+
     </style>
 </head>
 
@@ -72,9 +90,15 @@
                 <p>添加图书</p>
             </div>
             <div class="func">
-                <span>图书名称</span>
-                <input type="text">
-                <button>添加</button>
+                <div>
+                    <span>图书号</span>
+                    <input type="text" v-model.trim="bid">
+                </div>
+                <div>
+                    <span>图书名称</span>
+                    <input type="text" v-model.trim="name">
+                </div>
+                <button @click="addBook">添加</button>
             </div>
         </div>
         <div class="tbBox">
@@ -87,13 +111,22 @@
                     <td>操作</td>
                 </tr>
                 <!-- v-for 生成数据 -->
-                <tr v-for="(book,index) in bookData">
+                <tr v-for="(book,index) in bookData" :key="book.bid">
                     <td>{{index}}</td>
                     <td>{{book.bid}}</td>
                     <td>{{book.name}}</td>
-                    <td>{{book.status}}</td>
                     <td>
-                        <button>删除</button>
+                        <div v-if="book.status">
+                            <input :id="'cb'+index" type="checkbox" v-model="book.status">
+                            <label :for="'cb'+index">启用</label>
+                        </div>
+                        <div v-if="!book.status" class="status">
+                            <input :id="'cb'+index" type="checkbox" v-model="book.status">
+                            <label :for="'cb'+index">禁用</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button @click="deleteById(book.bid)">删除</button>
                     </td>
                 </tr>
             </table>
@@ -103,6 +136,8 @@
         const vm = new Vue({
             el: ".box",
             data: {
+                bid:'',
+                name:'',
                 bookData: [{
                     bid: 111,
                     name: "老人与海",
@@ -115,11 +150,31 @@
                 },
                 {
                     bid: 333,
-                    name: "爱与和平",
+                    name: "战争与和平",
                     status: true
                 },
+                {
+                    bid: 444,
+                    name: "平凡人生",
+                    status: false
+                },
                 ]
-            }
+            },
+            methods: {
+                deleteById(id) {
+                    this.bookData = this.bookData.filter(book =>
+                        book.bid != id
+                    )
+                },
+                addBook(){
+                    if(!this.bid||!this.name)return;
+                    this.bookData.push({
+                        bid:this.bid,
+                        name:this.name,
+                        status:true
+                    })
+                }
+            },
         });
     </script>
 </body>
